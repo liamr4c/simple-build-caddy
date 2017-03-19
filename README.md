@@ -15,6 +15,6 @@ By default, it just comes with what I need:
 * caddy-expires
 
 ## TLS 1.3
-![Yes!!][https://g.liams.io/liam/simple-build-caddy/raw/master/test/yes.png "TLS 1.3 Works!!!! Now if only we could get 0RTT...."]
+![Yes][https://g.liams.io/liam/simple-build-caddy/raw/master/test/yes.png]
 
 Caddy is built with TLS 1.3!!! I don't think it has 0-RTT support, however that would be quite hard anyway becuase caddy seems to rely on SNI very heavily. Additionally, liams.io is configured very weirdly and without major resructuring would likely not support lack of SNI and therefore 0RTT.
