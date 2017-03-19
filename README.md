@@ -1,14 +1,20 @@
 # Simple script to build caddy
 The script will build caddy into ./caddy. It's not super readable, but it works. 
 
-Just run `bash build.sh`. You need go (obviously). Go1.8 is magnitudes better than 1.7, so use that.
+## Usage
+1. run `build-tris.sh` to build a version of go with tris as 'crypto/tls'
+2. run `build.sh` to patch caddy with plugins and tls 1.3 support and the build it
+3. have `./caddy`
+
 
 ## Plugins
-If you read it, it should be straightforward to add more plugins.
+If you read `build.sh`, it should be straightforward to add more plugins.
 
 By default, it just comes with what I need:
 * caddy-git
 * caddy-expires
 
 ## TLS 1.3
-I would really like TLS 1.3 via tls-tris, but I doubt I'll have time to make it work before tris is merged with mainline go and caddy updated to use it anyway.
+![Yes!!][test/yes.png "TLS 1.3 Works!!!! Now if only we could get 0RTT...."]
+
+Caddy is built with TLS 1.3!!! I don't think it has 0-RTT support, however that would be quite hard anyway becuase caddy seems to rely on SNI very heavily. Additionally, liams.io is configured very weirdly and without major resructuring would likely not supoort 0RTT.

@@ -1,0 +1,5 @@
+localhost:2017 {
+	tls cert.pem key.pem {
+		protocols tls1.3 tls1.3
+	}
+}
