@@ -1,0 +1,2 @@
+github.com/abiosoft/caddy-git
+github.com/epicagency/caddy-expires

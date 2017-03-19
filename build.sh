@@ -1,16 +1,20 @@
 WHERE=$(pwd)
 GO=$(pwd)/go.sh
-export GOPATH=$(pwd)/go #TODO: unnessessary?
 
 $GO get github.com/mholt/caddy/caddy
-$GO get github.com/abiosoft/caddy-git
-$GO get github.com/epicagency/caddy-expires
+while read p; do
+	$GO get $p
+	echo $p
+done < plugins.txt
 
 cd go/src/github.com/mholt/caddy/caddy/
 git checkout HEAD -- ..
 rm caddy
-sed '/\/\/ This is where other plugins get plugged in (imported)/a \ 	_ "github.com/abiosoft/caddy-git"'  -i caddymain/run.go
-sed '/\/\/ This is where other plugins get plugged in (imported)/a \ 	_ "github.com/epicagency/caddy-expires"'  -i caddymain/run.go
+
+# --- Patch for plugins ---
+while read p; do
+	sed "/\/\/ This is where other plugins get plugged in (imported)/a \ 	_ \"$p\""  -i caddymain/run.go
+done < "$WHERE/plugins.txt"
 
 # --- Patch caddy for tls-tris ---
 sed 's/config\.ProtocolMaxVersion \= tls\.VersionTLS12/config.ProtocolMaxVersion = tls.VersionTLS13/g' -i ../caddytls/config.go

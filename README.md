@@ -8,14 +8,20 @@ The script will build caddy into ./caddy. It's not super readable, but it works.
 
 
 ## Plugins
-If you read `build.sh`, it should be straightforward to add more plugins.
-
-By default, it just comes with what I need:
+By default, it is configured to build caddy with the following plugins:
 * caddy-git
 * caddy-expires
+
+However, one can easily specify others by putting their `go get`able link in the `plugins.txt` file.
+For example, if I wanted to add the ipfilter plugin, the plugins.txt file would look like:
+```
+github.com/abiosoft/caddy-git
+github.com/epicagency/caddy-expires
+github.com/pyed/ipfilter
+```
 
 ## TLS 1.3
 
 ![Yes](https://g.liams.io/liam/simple-build-caddy/raw/master/test/yes.png)
 
-Caddy is built with TLS 1.3!!! I don't think it has 0-RTT support, however that would be quite hard anyway becuase caddy seems to rely on SNI very heavily. Additionally, liams.io is configured very weirdly and without major resructuring would likely not support lack of SNI and therefore 0RTT.
+Caddy is built with TLS 1.3!!! I don't think it has 0-RTT support, however that would be quite hard anyway because caddy seems to rely on SNI very heavily. Additionally, liams.io is configured very weirdly and without major restructuring would likely not support lack of SNI and therefore 0RTT.
